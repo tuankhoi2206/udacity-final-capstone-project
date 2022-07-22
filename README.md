@@ -1,10 +1,11 @@
 ## Serverless TODO - Enhancement
-According to my Todo project of course 4. This application will add a feature notify users who has tasks has one/two day left
+    According to my Todo project of course 4. This application will add a feature notify users who has tasks has one/two day left
 
 ## Functions implemented
-In this project, I added 2 functions to notify the users in serverless.yml file:
+    In this project, I added 2 functions to notify the users in serverless.yml file:
 
-## Function 1: Triggerd by scheduler to get all todo items with value of done column is false and publish message to SNS.
+## Function 1:
+    Triggerd by scheduler to get all todo items with value of done column is false and publish message to SNS.
 
 filterWarningMessage.ts
 ```ts
@@ -50,9 +51,10 @@ function checkTwoDayLeft(compareDate:string): boolean {
     return (dayDiff > 0 && dayDiff <= 2);
 }
 ```
-## Function 2: receive todo will notify to user, write the content of message out to console (CloudWatch) and send message to SNS
+## Function 2:
+    Receive todo will notify to user, write the content of message out to console (CloudWatch) and send message to SNS
+    
 sendWarningNotification.ts
-
 ```ts
 export const handler: SNSHandler = async (event: SNSEvent) => {
     console.log('Processing SNS event ', JSON.stringify(event))
