@@ -70,7 +70,7 @@ export const handler: SNSHandler = async (event: SNSEvent) => {
   }
 ```
 ## Send message to SNS
-![Alt text](final-capstone-image/cloudwatch.png?raw=true "Image 1")
+![Alt text](final-capstone-image/cloudwatch_log.png?raw=true "Image 1")
 
 Serverless.yml :
 ![Alt text](final-capstone-image/serverless_update.png?raw=true "Image 2")
