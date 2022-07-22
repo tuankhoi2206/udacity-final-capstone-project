@@ -98,4 +98,5 @@ functions:
                 - Ref: AWS::AccountId
                 - ${self:provider.environment.SNS_WARNING_TOPIC}
           topicName: ${self:provider.environment.SNS_WARNING_TOPIC}
-![A test image](https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/tuankhoi2206/udacity-final-capstone-project/blob/main/final-capstone-image/cloudwatch.png)
+          
+![Alt text]([images/lambda/filter_warning_todo_scheduler.png](https://github.com/tuankhoi2206/udacity-final-capstone-project/blob/main/final-capstone-image/cloudwatch.png)?raw=true "Image 2")
