@@ -65,7 +65,8 @@ export const handler: SNSHandler = async (event: SNSEvent) => {
   }
 
 Serverless.yml :
-#-----> update enhancement <------
+functions:
+  ....
   FilterWarningTodo:
     handler: src/lambda/scheduler/filterWarningMessage.handler
     events:
@@ -84,8 +85,9 @@ Serverless.yml :
         Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
     environment:
       AWS_ACCOUNT_ID: ${aws:accountId}
-  SendWarningNotification:
-    handler: src/lambda/sns/sendWarningNotification.handler
+
+  SendWarningMsgNotification:
+    handler: src/lambda/sns/sendWarningMsgNotification.handler
     events:
       - sns:
           arn:
@@ -94,89 +96,7 @@ Serverless.yml :
               - - arn:aws:sns
                 - Ref: AWS::Region
                 - Ref: AWS::AccountId
-                - ${self:provider.environment.SNS_WARNING_TODO_TOPIC}
-          topicName: ${self:provider.environment.SNS_WARNING_TODO_TOPIC}
-  #-----> end enhancement <------
-resources:
-  Resources:
-    GatewayResponseDefault4XX:
-      Type: AWS::ApiGateway::GatewayResponse
-      Properties:
-        ResponseParameters:
-          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
-          gatewayresponse.header.Access-Control-Allow-Headers: "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token'"
-          gatewayresponse.header.Access-Control-Allow-Methods: "'GET,OPTIONS,POST'"
-        ResponseType: DEFAULT_4XX
-        RestApiId:
-          Ref: ApiGatewayRestApi
+                - ${self:provider.environment.SNS_WARNING_TOPIC}
+          topicName: ${self:provider.environment.SNS_WARNING_TOPIC}
 
-    RequestBodyValidator:
-      Type: AWS::ApiGateway::RequestValidator
-      Properties:
-        Name: 'request-body-validator'
-        RestApiId:
-          Ref: ApiGatewayRestApi
-        ValidateRequestBody: true
-        ValidateRequestParameters: false      
-    
-    
-    TodosTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        AttributeDefinitions:
-          - AttributeName: todoId
-            AttributeType: S
-          - AttributeName: userId
-            AttributeType: S
-          - AttributeName: createdAt
-            AttributeType: S
-        KeySchema:
-          - AttributeName: userId
-            KeyType: HASH
-          - AttributeName: todoId
-            KeyType: RANGE
-        BillingMode: PAY_PER_REQUEST
-        TableName: ${self:provider.environment.TODOS_TABLE}
-        GlobalSecondaryIndexes:
-          - IndexName: ${self:provider.environment.TODOS_BY_USER_INDEX}
-            KeySchema:
-              - AttributeName: userId
-                KeyType: HASH
-              - AttributeName: createdAt
-                KeyType: RANGE
-            Projection:
-              ProjectionType: ALL
-
-
-    AttachmentsBucket:
-      Type: AWS::S3::Bucket
-      Properties:
-        BucketName: ${self:provider.environment.ATTACHMENT_S3_BUCKET}
-        CorsConfiguration:
-          CorsRules:
-            - AllowedOrigins:
-                - '*'
-              AllowedHeaders:
-                - '*'
-              AllowedMethods:
-                - GET
-                - PUT
-                - POST
-                - DELETE
-                - HEAD
-              MaxAge: 3000
-
-    BucketPolicy:
-      Type: AWS::S3::BucketPolicy
-      Properties:
-        PolicyDocument:
-          Id: MyPolicy
-          Version: '2012-10-17'
-          Statement:
-            - Sid: PublicReadForGetBucketObjects
-              Effect: Allow
-              Principal: '*'
-              Action: 's3:GetObject'
-              Resource: 'arn:aws:s3:::${self:provider.environment.ATTACHMENT_S3_BUCKET}/*'
-        Bucket: !Ref AttachmentsBucket
-    #-----> update enhancement <------
+![This is an image]([https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/tuankhoi2206/udacity-final-capstone-project/blob/main/final-capstone-image/cloudwatch.png))
