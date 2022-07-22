@@ -2,7 +2,7 @@
     According to my Todo project of course 4. This application will add a feature notify users who has tasks has one/two day left
 
 ## Functions implemented
-    In this project, I added 2 functions to notify the users in serverless.yml file:
+    In this project, I added 2 functions to notify the users in serverless.yml
 
 ## Function 1:
     Triggerd by scheduler to get all todo items with value of done column is false and publish message to SNS.
