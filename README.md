@@ -99,4 +99,4 @@ functions:
                 - ${self:provider.environment.SNS_WARNING_TOPIC}
           topicName: ${self:provider.environment.SNS_WARNING_TOPIC}
 
-![This is an image]([https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/tuankhoi2206/udacity-final-capstone-project/blob/main/final-capstone-image/cloudwatch.png))
+![This is an image](https://myoctocat.com/assets/images/base-octocat.svg](https://github.com/tuankhoi2206/udacity-final-capstone-project/blob/main/final-capstone-image/cloudwatch.png)
