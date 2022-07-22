@@ -1,12 +1,13 @@
-Serverless TODO - Enhancement
+## Serverless TODO - Enhancement
 According to my Todo project of course 4. This application will add a feature notify users who has tasks has one/two day left
 
-Functions implemented
+## Functions implemented
 In this project, I added 2 functions to notify the users in serverless.yml file:
 
-Function 1: Triggerd by scheduler to get all todo items with value of done column is false and publish message to SNS.
+## Function 1: Triggerd by scheduler to get all todo items with value of done column is false and publish message to SNS.
 
-filterWarningMessage.ts 
+filterWarningMessage.ts
+```ts
 const result = await this.docClient.scan({
             TableName: this.todosTable,
             FilterExpression: 'done = :done',
@@ -48,9 +49,11 @@ function checkTwoDayLeft(compareDate:string): boolean {
     var dayDiff = leftTime / (1000 * 60 * 60 * 24);
     return (dayDiff > 0 && dayDiff <= 2);
 }
-
-Function 2: receive todo will notify to user, write the content of message out to console (CloudWatch) and send message to SNS
+```
+## Function 2: receive todo will notify to user, write the content of message out to console (CloudWatch) and send message to SNS
 sendWarningNotification.ts
+
+```ts
 export const handler: SNSHandler = async (event: SNSEvent) => {
     console.log('Processing SNS event ', JSON.stringify(event))
     for (const snsRecord of event.Records) {
@@ -63,40 +66,12 @@ export const handler: SNSHandler = async (event: SNSEvent) => {
       }
     }
   }
+```
+## Send message to SNS
+![Alt text](final-capstone-image/cloudwatch.png?raw=true "Image 1")
 
 Serverless.yml :
-functions:
-  ....
-  FilterWarningTodo:
-    handler: src/lambda/scheduler/filterWarningMessage.handler
-    events:
-      - schedule:
-          rate: rate(1 minute)
-          enabled: true
-    iamRoleStatements:
-      - Effect: Allow
-        Action:
-          - sns:*
-        Resource: "*"
-      - Effect: Allow
-        Action:
-          - dynamodb:Scan
-          - dynamodb:GetItem
-        Resource: arn:aws:dynamodb:${self:provider.region}:*:table/${self:provider.environment.TODOS_TABLE}
-    environment:
-      AWS_ACCOUNT_ID: ${aws:accountId}
+![Alt text](final-capstone-image/serverless_update.png?raw=true "Image 2")
 
-  SendWarningMsgNotification:
-    handler: src/lambda/sns/sendWarningMsgNotification.handler
-    events:
-      - sns:
-          arn:
-            Fn::Join:
-              - ':'
-              - - arn:aws:sns
-                - Ref: AWS::Region
-                - Ref: AWS::AccountId
-                - ${self:provider.environment.SNS_WARNING_TOPIC}
-          topicName: ${self:provider.environment.SNS_WARNING_TOPIC}
-          
-![Alt text](final-capstone-image/cloudwatch.png?raw=true "Image 2")
+## Database
+![Alt text](final-capstone-image/Database.png?raw=true "Image 3")
