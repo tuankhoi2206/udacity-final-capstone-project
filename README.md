@@ -99,4 +99,4 @@ functions:
                 - ${self:provider.environment.SNS_WARNING_TOPIC}
           topicName: ${self:provider.environment.SNS_WARNING_TOPIC}
           
-![Alt text]([images/lambda/filter_warning_todo_scheduler.png](https://github.com/tuankhoi2206/udacity-final-capstone-project/blob/main/final-capstone-image/cloudwatch.png)?raw=true "Image 2")
+![Alt text](final-capstone-image/cloudwatch.png?raw=true "Image 2")
