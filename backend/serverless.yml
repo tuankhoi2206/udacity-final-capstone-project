@@ -44,21 +44,6 @@ provider:
             - xray:PutTraceSegments
           Resource: "*"
 
-custom:
-  documentation:
-    api:
-      info:
-        version: v1.0.0
-        title: Todo API
-        description: Serverless application for Todo App
-    models:
-      - name: CreateTodoRequest
-        contentType: application/json
-        schema: ${file(models/create-todo-model.json)}
-      - name: UpdateTodoRequest
-        contentType: application/json
-        schema: ${file(models/update-todo-model.json)}
-
 functions:
 
   Auth:

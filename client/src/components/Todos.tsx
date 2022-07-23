@@ -46,6 +46,13 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
 
   onTodoCreate = async (event: React.ChangeEvent<HTMLButtonElement>) => {
     try {
+      if (this.isTodoEmpty(this.state.newTodoName.trim())) {
+        alert('Todo name is not empty')
+        return
+      } else if (this.isContainSpecialCharacter(this.state.newTodoName.trim())) {
+        alert('Todo name is not contain special characters.')
+        return
+      }
       const dueDate = this.calculateDueDate()
       const newTodo = await createTodo(this.props.auth.getIdToken(), {
         name: this.state.newTodoName,
@@ -58,6 +65,18 @@ export class Todos extends React.PureComponent<TodosProps, TodosState> {
     } catch {
       alert('Todo creation failed')
     }
+  }
+
+  isTodoEmpty(todoName: string): boolean {
+    if (todoName.trim() == "" || todoName.trim().length == 0) {
+      return true
+    }
+    return false
+  }
+
+  isContainSpecialCharacter(todoName: string): boolean {
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/;
+    return specialChars.test(todoName);
   }
 
   onTodoDelete = async (todoId: string) => {

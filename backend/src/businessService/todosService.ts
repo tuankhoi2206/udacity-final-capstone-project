@@ -40,12 +40,6 @@ export async function updateTodo(userId: string, todoId: string, updatedTodo: Up
 
 export async function deleteTodo(userId: string, todoId: string): Promise<Boolean> {
     logger.info(`Deleting todo ${todoId} of userId ${userId}`, { todoId, userId })
-
-    const todo = await todoAccess.getAllTodo(userId)
-
-    if(!todo)
-        throw new Error('Todo not found')
-
     return await todoAccess.deleteTodo(userId, todoId)
 }
 
