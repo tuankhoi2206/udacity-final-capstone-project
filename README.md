@@ -83,3 +83,6 @@ Serverless.yml :
 
 ## Frontend Validation Request 
 ![Alt text](final-capstone-image/frontend_validation_request.png?raw=true "Image 5")
+
+## Delete Todo
+![Alt text](final-capstone-image/delete_todo.png?raw=true "Image 6")
