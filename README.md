@@ -2,7 +2,7 @@
     According to my Todo project of course 4. This application will add a feature notify users who has tasks has one/two day left
 
 ## Functions implemented
-    In this project, I added 2 functions to notify the users in serverless.yml file:
+    In this project, I added 2 functions to notify the users in serverless.yml
 
 ## Function 1:
     Triggerd by scheduler to get all todo items with value of done column is false and publish message to SNS.
@@ -70,7 +70,7 @@ export const handler: SNSHandler = async (event: SNSEvent) => {
   }
 ```
 ## Send message to SNS
-![Alt text](final-capstone-image/cloudwatch.png?raw=true "Image 1")
+![Alt text](final-capstone-image/cloudwatch_log.png?raw=true "Image 1")
 
 Serverless.yml :
 ![Alt text](final-capstone-image/serverless_update.png?raw=true "Image 2")
