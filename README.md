@@ -79,7 +79,7 @@ Serverless.yml :
 ![Alt text](final-capstone-image/Database.png?raw=true "Image 3")
 
 ## API Validation Request 
-![Alt text](final-capstone-image/final-capstone-image?raw=true "Image 4")
+![Alt text](final-capstone-image/api_validation_create_request.png?raw=true "Image 4")
 
 ## Frontend Validation Request 
 ![Alt text](final-capstone-image/frontend_validation_request.png?raw=true "Image 5")
